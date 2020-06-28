@@ -1,33 +1,52 @@
 import React, { useState, useEffect } from 'react';
+import {useLocalStorage} from './storage';
 import './App.css';
-
-import FooterNav from './FooterNav';
 
 function Step2 (props) {
 
-  const [message, setMessage] = useState("");
-
-  let options = {
-    back_step: 'signin',
-    next_step: 'about'
-  }
+  const [userName, setUserName] = useLocalStorage("username", "Jason");
+  const [err_name, setErrName] = useState("");
 
   // useEffect to handle initialising
   useEffect(() => {
     
   }, []);
 
+  const ValidateStep = () =>{
+    if (userName === ''){
+      setErrName('You must enter your name');
+    }
+    return (userName !=='');
+  }
+
+  const onStepBack = () =>
+  {
+    props.nav('signin');
+  }
+
+  const onStepNext = () =>
+  {
+    if (ValidateStep())
+    {
+      props.nav('about');
+    }
+  }
+
   return (
     <div>
-    <div>
-      <p>This is Step 2, here you can sign up</p>
-        <input 
-            type="text" 
-            onChange={e => setMessage(e.target.value)} 
-            value={message} 
-        />
-    </div>
-      <FooterNav step={props.step} nav={props.nav} options={options} />
+      <div>
+        <p>Ok, that's great, now tell us your name</p>
+          <input 
+              type="text" 
+              onChange={e => setUserName(e.target.value)} 
+              value={userName} 
+          />
+          <span className="input-error">{err_name}</span>
+      </div>
+      <div className="footer-nav">
+        <button onClick={e =>onStepBack()} className="button">BACK</button>
+        <button onClick={e =>onStepNext()} className="button">NEXT</button>
+      </div>  
     </div>
   );
 }

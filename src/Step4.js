@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import {useLocalStorage} from './storage';
 import './App.css';
-
-import FooterNav from './FooterNav';
 
 function Step4 (props) {
 
-  const [message, setMessage] = useState("");
-
-  let options = {
-    back_step: '',
-    next_step: '',
-    finish_step: ''
-  }
+  const message = useLocalStorage("message", "");
+  const name    = useLocalStorage("username", "");
+  const bio     = useLocalStorage("bio", "");
+  const data    = useLocalStorage("", "");
 
   // useEffect to handle initialising
   useEffect(() => {
@@ -22,8 +18,8 @@ function Step4 (props) {
     <div>
       <div>
         <p>You're done....laters x</p>
+        <p>So, you know your name is {name}, and you're {bio} and you're telling us {message}</p>
       </div>
-      <FooterNav step={props.step} nav={props.nav} options={options} />
     </div>
   );
 }
