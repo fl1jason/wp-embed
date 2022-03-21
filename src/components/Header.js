@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ProgresBar(props) {
+const ProgresBar = (props) => {
 
   const renderHeading = () =>{
     switch (props.step)

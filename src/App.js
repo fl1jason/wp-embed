@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
-import BookingForm from './BookingForm';
+import "@material-tailwind/react/tailwind.css";
+import Process from './process';
 
 function App() {
   return (
-    <div className="App">
-      <BookingForm />
-    </div>
+    <section className="max-w-3xl shadow-xl bg-white mx-auto z-10 rounded mb-20 mt-10">
+      <Process />
+    </section>
   );
 }
 
